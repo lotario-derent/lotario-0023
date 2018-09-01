@@ -1,42 +1,19 @@
-Roles-Guía
+<?php
 
-1.	Instalar proyecto Laravel
-//Mediante consola vamos a instalar el proyecto 
-# Composer create-project --prefer-dist Laravel/Laravel roles
+use Illuminate\Database\Seeder;
+use Caffeinated\Shinobi\Models\Permission;
 
-
-2.	Instalando Laravel Collective
-# Composer require laravelcollective/html
-//Posteriormente agregar provider y alias en la ruta config/app.php
-
-
-3.	Instalar Laravel shinobi
-# Composer require caffeinated/shinobi 
-//Posterior mente agregar provider
-
-4.	Crear bd en PhpMyAdmin
-
-//La llamaremos roles
-//Configurar en Laravel la conexión en .env
-
-5.	Configurar para la migración 
-
-//	Ir a la ruta App/Providers/AppServiceProviders.php  y agregar
-    use Illuminate\Support\Facades\Schema;
-
-//  Posteriormente vamos al metodo boot() y agregamos la siguiente linea
-	
-	Schema::defaultStringLength(120);
-
-// Ejecutar el suiniente comando para hacer la migración
-#php artisan migrate
-
-
-6.	Crear nuestro archivo seedder de permisos mediante el siguiente comando
-#php artisan make:seeder PersmissionsTableSeeder
-//ahora devemos configurarlo para crear llenar datos en la bd
-
-//Users
+class PersmissionsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+    	//Users
     	Permission::create([
 
     		'name'  => 'Navegar usuarios',
@@ -140,20 +117,6 @@ Roles-Guía
 
     	]);
 
-// Tambien devemos agregar la librearia del paquete para que pueda funcionar
-use Caffeinated\Shinobi\Models\Permission;
 
-7.  Devemos configuarar el archivo DatabaseSeeder.php de la siguiente forma
-
-$this->call(PersmissionsTableSeeder::class);
-
-// esto en el metodo run();
-//posteriormente devemos correr el comando
-#php artisan migrate:refresh --seed
-//esto nos llenará la bd
-
-8.Creando una entidad para la bd productos mediante el sieguinete comando se crearan los archivos base 
-
-#php artisan make:model Product -a
-
-
+    }
+}
